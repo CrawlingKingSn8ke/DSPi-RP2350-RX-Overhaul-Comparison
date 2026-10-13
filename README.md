@@ -1,3 +1,45 @@
+# DSPi RP2350 — beta1 / S/PDIF RX Overhaul Comparison
+
+Historical comparison build published for Weeb Labs to cross-check the merged firmware tested on my ESP32 S/PDIF music-player rig. This is **not the latest official DSPi firmware**, a replacement for the upstream release, or a claim that every validation check passed.
+
+## Exact build being shared
+
+| Item | Revision |
+| --- | --- |
+| Original merge, 14 August 2026 | [`980930007b91f65cb36c10d5a30a6fef8cf7cfcc`](https://github.com/CrawlingKingSn8ke/DSPi-RP2350-RX-Overhaul-Comparison/commit/980930007b91f65cb36c10d5a30a6fef8cf7cfcc) |
+| Official v1.1.6-beta1 parent | `8bdb00cf5c5308419c35dfcc36f72b7d01bbc4bd` |
+| S/PDIF RX overhaul parent | `7c3c7bf034e73425538e0169d352993536f3dbdb` |
+| Target | Pico 2 / RP2350 Arm Secure |
+| Clock diagnostics | Enabled, `DSPI_CLOCK_DIAG=1` |
+
+The original two-parent Git history is preserved. `main` adds only comparison documentation on top of the original merge; firmware and build scripts are unchanged. The release tag points directly to the original merge commit, not the documentation commit.
+
+- [Original UF2, BIN and supporting records](https://github.com/CrawlingKingSn8ke/DSPi-RP2350-RX-Overhaul-Comparison/releases/tag/v1.1.6-beta1-rx-overhaul-comparison)
+- [Merge notes](comparison/MERGE-NOTES.md)
+- [Build record and validation caveats](comparison/BUILD-RECORD.md)
+- [Official upstream DSPi](https://github.com/WeebLabs/DSPi)
+
+The UF2 is the preserved August build, **not a newly compiled image**. Its SHA-256 is `977B5DC610E647386F350B7A45A37D5E3613923AF38296E8E563EE800B1CEEB9`. The later local polling-script edit, logs and scratch builds are not included.
+
+For a source comparison against beta1:
+
+```sh
+git diff 8bdb00cf5c5308419c35dfcc36f72b7d01bbc4bd 980930007b91f65cb36c10d5a30a6fef8cf7cfcc -- firmware scripts
+```
+
+To check out the exact historical source with its pinned SDK:
+
+```sh
+git clone https://github.com/CrawlingKingSn8ke/DSPi-RP2350-RX-Overhaul-Comparison.git
+cd DSPi-RP2350-RX-Overhaul-Comparison
+git checkout v1.1.6-beta1-rx-overhaul-comparison
+git submodule update --init --recursive
+```
+
+Original upstream licence and attribution are retained below and in `LICENSE`.
+
+---
+
 # DSPi Firmware
 
 **DSPi** transforms a Raspberry Pi Pico or other RP2040-based board into a very competent and inexpensive little digital audio processor. It acts as a USB sound card with an onboard DSP engine, allowing you to make use of essential tools like room correction, active crossovers, parametric EQ, time alignment, loudness compensation, and headphone crossfeed.
